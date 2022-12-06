@@ -21,14 +21,9 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 data = load_outputs(DATA_PATH)
 app = dash.Dash(__name__) # , external_stylesheets=external_stylesheets
 server = app.server
-
-
-def main(app, data) -> None:
-    """ """
-    app.title = 'Multicriteria land cover design results'
-    create_layout(app, data)
-    app.run_server(debug=False)
+app.title = 'Multicriteria land cover design results'
 
 
 if __name__ == '__main__':
-    main(app, data)
+    create_layout(app, data)
+    app.run_server(debug=False, host='0.0.0.0', port=8050)
