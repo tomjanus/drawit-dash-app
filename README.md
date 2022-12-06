@@ -1,5 +1,4 @@
-### **D**esigning **R**esilient and **A**daptable \
-    **W**ater management - **I**ntegrated & Interactive **T**ools
+### Designing Resilient and Adaptable Water management - Integrated & Interactive Tools
 
 This repository contains an interactive DASH application for interactive visual
 exploration of the key results obtained from part of a research project entitled
