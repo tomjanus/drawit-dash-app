@@ -19,6 +19,8 @@ DATA_PATH = os.path.join('data/', 'outputs_all_nondom.csv')
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 data = load_outputs(DATA_PATH)
+
+
 app = dash.Dash(__name__) # , external_stylesheets=external_stylesheets
 server = app.server
 app.title = 'Multicriteria land cover design results'
