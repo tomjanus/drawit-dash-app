@@ -10,8 +10,8 @@ Tomasz Janus
 """
 import os
 import dash
-from src.components.layout import create_layout
-from src.data.loader import load_outputs
+from components.layout import create_layout
+from utils import load_outputs
 
 
 DATA_PATH = os.path.join('data/', 'outputs_all_nondom.csv')
