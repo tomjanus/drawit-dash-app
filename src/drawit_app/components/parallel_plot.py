@@ -2,6 +2,7 @@
 import collections
 import dash
 from dash import html, dcc
+import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 from . import ids
@@ -42,7 +43,8 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
             pps.filtered_data.reset_index(inplace=True)
         return pps.filtered_data.reset_index().round(2).to_dict('records')
 
-    # Callback for colouring parallel plot based on the selected objective function
+    # Callback for colouring parallel plot based on the selected objective
+    # function
     @app.callback(
         dash.dependencies.Output(ids.PARALLEL_PLOT, 'figure'),
         [dash.dependencies.Input(ids.RADIO_ITEMS, 'value')])
@@ -53,11 +55,11 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
             color=selector,
             color_continuous_scale=px.colors.cyclical.IceFire,
         )
+        figure.update(layout_coloraxis_showscale=False)
         return figure
 
     return html.Div([
         dcc.Graph(
-            id=ids.PARALLEL_PLOT
+            id=ids.PARALLEL_PLOT, style={'padding': '0px', 'margin': '0px'}
         ),
-        ], style={'padding': '0px'}, className="seven columns"
-    )
+        ], style={'padding': '0px', 'margin': '0px'})

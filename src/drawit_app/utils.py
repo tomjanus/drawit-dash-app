@@ -8,7 +8,7 @@ def get_package_file(*folders: str) -> pathlib.PosixPath:
     """Imports package data using importlib functionality.
 
     Args:
-        *folers: comma-separated strings representing path to the packaged data
+        *folders: comma-separated strings representing path to the packaged data
             file.
     Returns:
         A os-indepenent posix path of the data file.
@@ -29,5 +29,7 @@ def get_package_file(*folders: str) -> pathlib.PosixPath:
 
 
 def load_outputs(path: str) -> pd.DataFrame:
-    """ """
+    """
+    Loads tabular data in a csv file and returns pandas.DataFrame
+    """
     return pd.read_csv(path, index_col=0)

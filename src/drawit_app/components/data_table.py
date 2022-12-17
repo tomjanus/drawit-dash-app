@@ -19,6 +19,7 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
                      results[objectives_with_index].columns],
             data=results[objectives_with_index].round(2).to_dict('records'),
             sort_action='native',
+            row_selectable='single',
             fixed_rows={'headers': False},
             page_current=0,
             page_size=11,
@@ -28,4 +29,4 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
             style_table={'height': '370px', 'overflowY': 'auto'},
             style_cell={'minWidth': 75, 'width': 95}
         ),
-    ], className="five columns")
+    ])

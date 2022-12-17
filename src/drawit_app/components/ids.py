@@ -14,8 +14,15 @@ Z_AXIS_DROPDOWN_3D = "z-axis-dropdown-3d"
 COLOR_DROPDOWN_3D = "color-dropdown-3d"
 SIZE_DROPDOWN_3D = "size-dropdown-3d"
 RESET_TO_DEFAULTS = "reset-button"
+DROPDOWNS_ROW = "dropdowns-row"
 
 DOWNLAOAD_BUTTON = "download button"
 DOWNLOADER = "downloader"
+
+CARROUSEL = "carrousel"
+CARROUSEL_TITLES = "carrousel-titles"
+CARROUSEL_DESCRIPTIONS = "carrousel-descriptions"
+
+TABLE_3D_PLOT_TAB = "table-3dplot-tab"
 
 DUMMY = "dummy"

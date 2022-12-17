@@ -1,7 +1,6 @@
 """ """
 import dash
-from dash import html, dcc
-from dash.exceptions import PreventUpdate
+from dash import dcc, ctx
 from plotly import graph_objs as go
 import pandas as pd
 from . import ids
@@ -13,19 +12,11 @@ hovertemplate_single_heatmap = (
     "<extra></extra>")
 
 
-def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
+def render(app: dash.Dash, results: pd.DataFrame) -> dcc.Graph:
     """ """
 
-    @app.callback(
-        dash.dependencies.Output(ids.HEATMAP, "figure"),
-        [dash.dependencies.Input(ids.PARETO_3D, 'clickData')])
-    def update_heatmap(selected_point):
-        if selected_point is None:
-            selected_row_index = 0
-        else:
-            selected_row_index = selected_point['points'][0]['pointNumber']
-
-        heatmap_df = results[constants.var_for_heatmap].iloc[[selected_row_index]]
+    def create_heatmap(row_index) -> go.Figure:
+        heatmap_df = results[constants.var_for_heatmap].iloc[[row_index]]
         heatmap_entries = heatmap_df.to_numpy().squeeze()
         hover_list = [constants.landuse_dict[
             heatmap_entries[i]] for i in range(len(heatmap_entries))]
@@ -54,6 +45,25 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
             height=100)
         return fig2
 
-    return html.Div([
-        dcc.Graph(id=ids.HEATMAP)
-    ], className="six columns")
+    @app.callback(
+        dash.dependencies.Output(ids.HEATMAP, "figure"),
+        [dash.dependencies.Input(ids.PARETO_3D, 'clickData'),
+         dash.dependencies.Input(ids.DATA_TABLE, 'data'),
+         dash.dependencies.Input(ids.DATA_TABLE, 'selected_rows')])
+    def update_heatmap(selected_point, data, selected_rows):
+        trigger_id = ctx.triggered_id
+        # Perform different actions depending on whether the Callback
+        # is triggered by the table or by the 3D plot
+        if trigger_id == ids.PARETO_3D:
+            if selected_point is None:
+                selected_row_index = 0
+            else:
+                selected_row_index = selected_point['points'][0]['pointNumber']
+        elif trigger_id == ids.DATA_TABLE:
+            index_column = data[selected_rows[0]]['index']
+            selected_row_index = index_column
+        else:
+            selected_row_index = 0
+        return create_heatmap(selected_row_index)
+
+    return dcc.Graph(id=ids.HEATMAP)

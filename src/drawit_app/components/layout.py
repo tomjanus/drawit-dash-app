@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from . import (
     radio_items, parallel_plot, data_table, heatmap, pie_chart, introduction,
-    plot_3d, dropdowns, download_button)
+    plot_3d, dropdowns, download_button, body)
 
 
 DIAGRAM_DESCRIPTION = '''
@@ -22,111 +22,88 @@ water release curve that adjusts $q_{HP}$ as a function of reservoir volume.
 '''
 
 
+def create_header(app: Dash) -> dbc.Row:
+    """ """
+    header = dbc.Row([
+        dbc.Col(html.H1('DRAW-IT'), width=6),
+        dbc.Col(
+            html.Img(
+                src=app.get_asset_url('img/logo_big.gif'),
+                style={"width": "100%"}),
+            align="center", width=2),
+        dbc.Col(
+            html.Img(
+                src=app.get_asset_url(
+                    'img/university-of-southampton-vector-logo-small.png'),
+                style={"width": "100%"}),
+            align="center", width=2),
+        dbc.Col(
+            html.Img(
+                src=app.get_asset_url('img/juelich_sc.jpg'),
+                style={"width": "100%"}),
+            align="center", width=2)
+        ], style={
+            "margin-bottom": "15px", "margin-top": "0px",
+            'padding-top': '30px'})
+    return header
+
+
+def create_footer(app: Dash) -> dbc.Row:
+    """ """
+    footer = dbc.Row(
+        [
+            dbc.Col(html.P([
+                html.I("Created by:  "),
+                "Tomasz Janus, University of Manchester"])),
+            dbc.Col(
+                html.Header([
+                    html.A(
+                        href="https://github.com/tomjanus",
+                        title="Check my GitHub",
+                        children=[
+                            html.Img(
+                                alt="Link to my Github Page",
+                                src=app.get_asset_url(
+                                    'img/GitHub-Mark-32px.png'))
+                        ], style={'margin-right': 10}),
+                    html.A(
+                        href="mailto:tomasz.k.janus@gmail.com",
+                        title="Send me a message",
+                        children=[
+                            html.Img(
+                                alt="Link to my Mailbox address",
+                                src=app.get_asset_url(
+                                    'img/gmail-32px.png'))
+                        ], style={'margin-right': 10}),
+                    html.A(
+                        href="https://www.linkedin.com/in/tomasz-janus-6443b7198/",
+                        title="Visit my LinkedIn profile",
+                        children=[
+                            html.Img(
+                                alt="Link to my LinkedIn Page",
+                                src=app.get_asset_url(
+                                    'img/linkedin-32px.png'))])
+                    ])
+            )], style={'margin-top': '10pt', 'margin-bottom': '10pt'})
+    return footer
+
+
+def add_introduction(app: Dash) -> dbc.Row:
+    """ """
+    return dbc.Row(introduction.render(app))
+
+
 def create_layout(app: Dash, data: pd.DataFrame) -> None:
-    """Create main application layout"""
-    app.layout = html.Div([
-        html.Div([
-            html.H1(children='DRAW-IT',
-                    className='six columns'),
-            html.Div([
-                html.Img(
-                    src=app.get_asset_url('img/logo_big.gif'),
-                    style={"display": "block", "padding": "10px"},
-                    className='two columns'),
-                html.Img(
-                    src=app.get_asset_url(
-                        'img/university-of-southampton-vector-logo-small.png'),
-                    style={"display": "block",
-                           "padding": "10px",
-                           "margin-top": "5px"},
-                    className='two columns'),
-                html.Img(
-                    src=app.get_asset_url('img/juelich.jpg'),
-                    style={"display": "block", "padding": "10px",
-                           "margin-top": "5px"},
-                    className='two columns'),
-            ]),
+    app.layout = dbc.Container([
+        create_header(app),
+        introduction.render(app),
+        body.render(app, data),
+        create_footer(app)
+    ], fluid="xl")
 
-            html.Div([
-                introduction.render(app),
-                html.H6(
-                    children='The block diagram representing the connection \
-                        between Parflow/CLM and Pywr models is given below',
-                    className='twelve columns',
-                    style={"text-align": "center"}),
-
-                html.Img(
-                    src=app.get_asset_url('img/combined_model_diagram_simplified.svg'),
-                    style={"border": "1px solid #ddd",
-                           "display": "block",
-                           "border-radius": "4px",
-                           "padding": "15px",
-                           "margin-left": "auto",
-                           "margin-right": "auto",
-                           "width": "55%"}),
-            ], className="row"),
-
-            html.Div([
-                dcc.Markdown(children=DIAGRAM_DESCRIPTION, mathjax=True)
-            ], className="row"),
-
-            html.Div([
-                html.H3(children='Multiobjective optimisation results',
-                        className='ten columns',
-                        style={"text-align": "center"}),
-                download_button.render(app, data),
-            ], className="row"),
-
-            radio_items.render(app),
-
-            html.Div([
-                parallel_plot.render(app, results=data),
-                data_table.render(app, results=data),
-            ], style={'padding': '0px'}, className="row"),
-
-            html.Div([
-                html.Div([
-                    plot_3d.render(app, data)
-                ], style={'padding': '0px'}, className="sixcolumns"),
-                html.Div([
-                    html.H5(
-                        children="Spatial distribution of land covers on the hillslope",
-                        style={'textAlign': 'center'}),
-                    heatmap.render(app, results=data),
-                    html.H5(
-                        children="Composition of land covers on the hillslope",
-                        style={'textAlign': 'center'}),
-                    pie_chart.render(app, results=data)
-                ])
-            ], style={'padding': '0px'}, className="row"),
-
-            html.Div([
-                dropdowns.render(app),
-            ], style={'padding': '0px'}, className="row"),
-
-            html.Div(
-                dbc.Row(
-                    [
-                        dbc.Col(html.Div("Authored by: Tomasz Janus"),
-                                style={'margin-top': 10}),
-                        dbc.Col(html.Div("Please, visit my GitHub page: "),
-                                width=3,
-                                style={'display': 'inline-block',
-                                       'text-align': 'justify',
-                                       'margin-right': 10}),
-                        dbc.Col(html.A(
-                            href="https://github.com/tomjanus",
-                            children=[
-                                html.Img(
-                                    alt="Link to my Github Page",
-                                    src=app.get_asset_url(
-                                        'img/GitHub-Mark-32px.png')
-                                )
-                            ]), style={
-                                'display': 'inline-block',
-                                'text-align': 'justify'}),
-                    ]
-                ),
-            ),
-        ], style={'margin': '40px'}),
-    ])
+"""
+        dbc.Popover(
+            popover_children,
+            target="focus-target",
+            body=True,
+            trigger="focus", """

@@ -2,6 +2,7 @@
 from typing import List
 import dash
 from dash import html, dcc
+import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 import pandas as pd
 import plotly.graph_objects as go
@@ -13,7 +14,7 @@ objectives_from_labels = {
     value: label for label, value in labels_from_objectives.items()}
 
 
-def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
+def render(app: dash.Dash, results: pd.DataFrame) -> dcc.Graph:
     """ """
 
     @app.callback(
@@ -51,7 +52,7 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
         y_values_excl = results_excl[y_label]
         z_values_excl = results_excl[z_label]
 
-        #Update hover text
+        # Update hover text
         hovertext: List[str] = []
         for _, row in results.iterrows():
             x_label_txt = labels_from_objectives[constants.OBJECTIVES[0]]
@@ -86,8 +87,7 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
                     size=4,
                     color='grey',
                     colorscale='Viridis',   # choose a colorscale
-                    opacity=0.3
-                ),
+                    opacity=0.3),
             )
         )
         fig.add_trace(
@@ -103,7 +103,7 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
                     color=color_values,
                     colorscale='Viridis',   # choose a colorscale
                     opacity=0.8
-                ),
+                )
             )
         )
 
@@ -141,12 +141,4 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
                     zerolinecolor="white",),),
             )
         return fig
-
-    return html.Div([
-        dcc.Graph(
-            #figure=fig,
-            id=ids.PARETO_3D,
-            style={'width': '90vh', 'height': '90vh'}
-        ),
-        ], style={'padding': '0px'}, className="six columns"
-    )
+    return dcc.Graph(id=ids.PARETO_3D)

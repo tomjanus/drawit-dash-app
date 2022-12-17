@@ -11,14 +11,13 @@ def render(app: dash.Dash) -> html.Div:
         dcc.RadioItems(
             id=ids.RADIO_ITEMS,
             options=[
-                {'label': 'Hydropower', 'value': 'annual HP'},
-                {'label': 'Flooded area', 'value': 'flood extent'},
-                {'label': 'No. of crops', 'value': 'no. crops'},
-                {'label': 'No. of bare soil', 'value': 'no. bare'},
-                {'label': 'Land cover diversity', 'value': 'diversity'}
+                {'label': ' Hydropower', 'value': 'annual HP'},
+                {'label': ' Flooded area', 'value': 'flood extent'},
+                {'label': ' No. of crops', 'value': 'no. crops'},
+                {'label': ' No. of bare soils', 'value': 'no. bare'},
+                {'label': ' Cover diversity', 'value': 'diversity'}
             ],
             value='annual HP',
-            labelStyle={'display': 'inline-block'},
-            className='six columns'
+            labelStyle={'display': 'inline-block', 'margin-right': '5pt'}
         )
-    ], className="row")
+    ])

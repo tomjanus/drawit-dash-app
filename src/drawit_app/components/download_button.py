@@ -21,5 +21,5 @@ def render(app: dash.Dash, results: pd.DataFrame) -> html.Div:
         [
             html.Button("Download DATA", id=ids.DOWNLAOAD_BUTTON),
             dcc.Download(id=ids.DOWNLOADER),
-        ], className="two columns", style={'padding': '25px'}
+        ], style={'text-align': 'center'}
     )

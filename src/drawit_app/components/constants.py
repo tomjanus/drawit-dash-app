@@ -6,8 +6,8 @@ OBJECTIVES: List[str] = [
     'annual HP', 'flood extent', 'no. crops', 'no. bare', 'diversity']
 
 labels_parallel_plot = [
-    "HP prod. [MWh]", "flooded area [ha]", "no. of crops [-]",
-    "no. of bare soils [-]", "land cover diversity [-]"]
+    "HP prod. [MWh]", "flooded area [ha]", "no. of crops",
+    "no. of bare soils", "cover diversity"]
 
 parallel_plot_vars = dict(zip(OBJECTIVES, labels_parallel_plot))
 

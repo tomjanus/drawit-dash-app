@@ -11,21 +11,29 @@ Tomasz Janus
 import os
 import dash
 from components.layout import create_layout
+import dash_bootstrap_components as dbc
+from dash_bootstrap_templates import load_figure_template
 from utils import load_outputs
 
+local_data_path = os.path.join('data/', 'outputs_all_nondom.csv')
+external_data_path = "https://raw.githubusercontent.com/tomjanus/drawit-dash-app/main/src/drawit_app/data/outputs_all_nondom.csv"
+external_stylesheets = [
+    dbc.themes.LUX,
+    'https://codepen.io/chriddyp/pen/bWLwgP.css']
+load_figure_template('LUX')
 
-DATA_PATH = os.path.join('data/', 'outputs_all_nondom.csv')
+if os.path.exists(local_data_path):
+    input_file_path = local_data_path
+else:
+    input_file_path = external_data_path
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+data = load_outputs(input_file_path)
 
-data = load_outputs(DATA_PATH)
-
-
-app = dash.Dash(__name__) # , external_stylesheets=external_stylesheets
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 app.title = 'Multicriteria land cover design results'
 
 
 if __name__ == '__main__':
     create_layout(app, data)
-    app.run_server(debug=False, host='0.0.0.0', port=8050)
+    app.run_server(debug=True)
