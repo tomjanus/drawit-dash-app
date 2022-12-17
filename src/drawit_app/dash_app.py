@@ -30,10 +30,11 @@ else:
 data = load_outputs(input_file_path)
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+create_layout(app, data)
+
 server = app.server
 app.title = 'Multicriteria land cover design results'
 
 
 if __name__ == '__main__':
-    create_layout(app, data)
     app.run_server(debug=True)
