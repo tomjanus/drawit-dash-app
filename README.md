@@ -1,13 +1,10 @@
-### Designing Resilient and Adaptable Water management - Integrated & Interactive Tools
+## ABOUT THE REPOSITORY
 
 This repository contains an interactive DASH application for interactive visual
 exploration of the key results obtained from part of a research project entitled
 [**DRAW-IT:** **D**esigning **R**esilient and **A**daptive **W**ater management: 
 **I**ntegrated & Interactive Tools]
 (https://www.ukclimateresilience.org/projects/draw-it-designing-resilient-and-adaptable-water-management-integrated-interactive-tools/)
-
-You can access the application on 
-[drawit-moea-results.onrender.com](https://drawit-moea-results.onrender.com/)
 
 The study linked a mechanistic distributed hydrologic model of a hillslope
 built in [Parflow](https://parflow.org/) with a water resources management
@@ -39,3 +36,22 @@ peer-review entitled:
 land and water management models* by:
 Tomasz Janus, James Tomlinson, Daniela Anghileri, Justin Sheffield,
 Stefan Kollet, and Julien Harou.
+
+## USAGE
+
+As a first step, install the required packages:
+
+```
+pip install -r requirements.txt
+```
+
+This is how you run the code locally. Go to `src/drawit_app/` and run the script:
+
+```
+python dash_app.py
+```
+
+You can access the application on 
+[drawit-moea-results.onrender.com](https://drawit-moea-results.onrender.com/)
+
+

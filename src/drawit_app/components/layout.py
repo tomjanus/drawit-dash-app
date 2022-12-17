@@ -58,11 +58,11 @@ def create_footer(app: Dash) -> dbc.Row:
             dbc.Col(
                 html.Header([
                     html.A(
-                        href="https://github.com/tomjanus",
-                        title="Check my GitHub",
+                        href="https://github.com/tomjanus/drawit-dash-app",
+                        title="Check the source code",
                         children=[
                             html.Img(
-                                alt="Link to my Github Page",
+                                alt="Link to source code",
                                 src=app.get_asset_url(
                                     'img/GitHub-Mark-32px.png'))
                         ], style={'margin-right': 10}),
