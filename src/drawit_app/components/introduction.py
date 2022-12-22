@@ -20,18 +20,18 @@ built in [Parflow](https://parflow.org/) with a **water resources management
 model** created with [Pywr](https://github.com/pywr/pywr).
 Parflow is integrated with a state-of-the art **land model**
 [CLM](https://www.cesm.ucar.edu/models/clm/) which allows us to evaluate how
-different types of land covers impact water and energy dynamics on a hillslope.
+different types of land covers impact water and energy dynamics in a catchment.
 
 The resulting integrated hydrologic, land and water resources model was embedded
 in a many-objective **MultiObjective Evolutionary Algorithm (MOEA)** in order to
-find land-cover combinations that optimally balance food, energy, biodiversity
+find land cover combinations that optimally balance food, energy, biodiversity
 and flood resilience aspects of catchment management. This study implemented a
 multiobjective genetic algorithm [NSGA-III]
 (https://ieeexplore.ieee.org/document/6600851).
 
 The study reveals patterns in the composition of land covers and their
 spatial distributions in optimized solutions for different mixes of objectives.
-These land cover patterns are a result from complex bi-directional spatially
+These land cover patterns result from complex bi-directional spatially
 distributed interactions between land and subsurface processes.
 
 The study highlights the added benefit of considering subsurface-land

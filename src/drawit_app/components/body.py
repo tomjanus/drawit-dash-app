@@ -10,7 +10,7 @@ from . import (
 DOWNLOAD_BUTTON_TEXT = '''
 If you wish to explore and analyse the land use optimization results presented
 on this page with your own algorithms and methods, you can download the raw
-data in <b>CSV format</b> by clicking on the button below.
+data in CSV format by clicking on the button below.
 '''
 
 MAIN_OUTCOMES_TEXT = '''
