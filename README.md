@@ -30,12 +30,8 @@ interactions in multi-sector water-food-energy-environment **NEXUS** studies - s
 e.g [FAO](https://www.fao.org/land-water/water/watergovernance/waterfoodenergynexus/en/)
 and [UN-Water](https://www.unwater.org/water-facts/water-food-and-energy).
 
-This work has been described in detail in our manuscript currently undergoing
-peer-review entitled:
-*Multicriteria land cover design in multi-sector systems via coupled distributed
-land and water management models* by:
-Tomasz Janus, James Tomlinson, Daniela Anghileri, Justin Sheffield,
-Stefan Kollet, and Julien Harou.
+This work has been described in detail in our manuscript entitled:
+[Multicriteria land cover design in multi-sector systems via coupled distributed land and water management models](https://www.sciencedirect.com/science/article/pii/S0022169423002366) by: Tomasz Janus, James Tomlinson, Daniela Anghileri, Justin Sheffield, Stefan Kollet, and Julien Harou.
 
 ## USAGE
 
